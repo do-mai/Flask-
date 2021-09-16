@@ -2,9 +2,12 @@
 
 {% block content %}
 
+
 <div>
 
-<p>{{user_info[0]}}さん こんにちは</p><br>
+  <img src="../static/img/no_img.png">
+  <p>{{user_info[0]}}さん こんにちは</p><br>
+  <a herf="/updaload"></a>
 
   <form action="/add" method="post">
     投稿者：{{user_info[0]}}<br>
@@ -12,6 +15,11 @@
     <input type="submit" name="save" value="送信">
   </form>
 
+  <script type="text/javascript">
+    function delete_check(){
+      return window.confirm("削除してもいいですか？");
+    };
+  </script>
 
   {% for item in comment_list %}
   <div class="bbs_content">
@@ -19,8 +27,9 @@
       <a href="/edit/{{item['id']}}">編集</a>
       <form action="/del" method="post">
         <input type="hidden" name="comment_id" value="{{item['id']}}">
-        <input type="submit" name="delete" value="削除する">
-    </form><br><br>
+        <input type="submit" name="delete" value="削除する" onclick="return delete_check()">
+
+      </form><br><br>
   </div>
   {% endfor %}
 
