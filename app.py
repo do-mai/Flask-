@@ -2,6 +2,7 @@
 import sqlite3
 # flaskをimportしてflaskを使えるようにする
 from flask import Flask , render_template , request , redirect , session
+from datetime import datetime
 # appにFlaskを定義して使えるようにしています。Flask クラスのインスタンスを作って、 app という変数に代入しています。
 app = Flask(__name__)
 
@@ -78,7 +79,7 @@ def logout():
 def bbs():
     if 'user_id' in session :
         # クッキーからuser_idを取得
-        user_id = session['user_id']
+        user_id = session['user_id'] 
         conn = sqlite3.connect('service.db')
         c = conn.cursor()
         # # DBにアクセスしてログインしているユーザ名と投稿内容を取得する
@@ -105,7 +106,7 @@ def add():
     conn = sqlite3.connect('service.db')
     c = conn.cursor()
     # DBにデータを追加する
-    c.execute("insert into bbs values(null,?,?,?,?,?)", (user_id, comment, 0, "2021/09/16", ""))
+    c.execute("insert into bbs values(null,?,?,?,?,?)", (user_id, comment, 0, datetime.now(), ""))
     conn.commit()
     conn.close()
     return redirect('/bbs')
