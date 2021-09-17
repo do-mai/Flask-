@@ -23,6 +23,7 @@
 
   {% for item in comment_list %}
   <div class="bbs_content">
+    <p>投稿時間：{{item["datetime"]}}</p>
     <p>{{item["comment"]}}</p>
       <a href="/edit/{{item['id']}}">編集</a>
       <form action="/del" method="post">
